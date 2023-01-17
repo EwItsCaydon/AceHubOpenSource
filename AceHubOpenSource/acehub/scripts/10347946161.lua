@@ -1,31 +1,3 @@
---Auth
-local httprequest = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
-if _G.keyss == nil then
-    game.Players.LocalPlayer:Kick("nice try")
-end
-
-function checkauth()
-    local Response = httprequest({
-        Url = "http://acehub.pro/api/checkauth",
-        Method = "POST",
-        Headers = {
-            ["Content-Type"] = "application/json"
-        },
-        Body = game:GetService("HttpService"):JSONEncode({
-            key=_G.keyss,
-            userid=tostring(game.Players.LocalPlayer.UserId),
-            gameid=tostring(game.PlaceId)
-        })
-    })
-    if Response.Body == nil then
-        game.Players.LocalPlayer:Kick("Cant reach API or Key Error")
-    else if Response.Body == "authenticated" then
-        wait()
-    else
-        game.Players.LocalPlayer:Kick("Expired or invalid key!")
-        end
-    end
-end
 
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
